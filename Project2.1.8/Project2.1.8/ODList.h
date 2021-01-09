@@ -177,6 +177,10 @@ private:
 			setIncome();
 		}
 
+		Student(char a, char b)
+		{
+		}
+
 		Student(T a, int b, double c, string d) :val(a), group(b),income(c), f_s_t_names(d)
 		{
 		}
@@ -221,6 +225,11 @@ private:
 		void getMark()
 		{
 			cout << "Mark is:" << val << endl;
+		}
+
+		T Mark()
+		{
+			return val;
 		}
 
 		void get()
@@ -379,105 +388,7 @@ public:
 	{
 		return !(it == *this);
 	}
-
-	void Shellgr()
-	{
-		try
-		{
-			if (is_empty())
-				throw MyException("tried to sort an empty list\n");
-			T count = 0;
-			string counts;
-			double countd;
-			int counti;
-			int i = 0;
-			int d = size();
-			int n = d;
-			d = d / 2;
-			while (d > 0)
-			{
-				Student* cur = head;
-				Student* last = head;
-				for (i = 0; i < d; i++)
-				{
-					last = last->next;
-				}
-				for (i = 0; i < n - d; i++)
-				{
-					int j = i;
-					while (j >= 0 && cur->group > last->group)
-					{
-						count = cur->val;
-						cur->val = last->val;
-						last->val = count;
-
-						countd = cur->income;
-						cur->income = last->income;
-						last->income = countd;
-
-						counts = cur->f_s_t_names;
-						cur->f_s_t_names = last->f_s_t_names;
-						last->f_s_t_names = counts;
-
-						counti = cur->group;
-						cur->group = last->group;
-						last->group = counti;
-
-						j--;
-					}
-					cur = cur->next;
-					last = last->next;
-				}
-				d = d / 2;
-
-				if (d == 0)
-				{
-					d = 1;
-					Student* cur = head;
-					Student* last = head;
-					for (i = 0; i < d; i++)
-					{
-						last = last->next;
-					}
-					for (i = 0; i < n - d; i++)
-					{
-						int j = i;
-						while (j >= 0 && cur->group > last->group)
-						{
-							count = cur->val;
-							cur->val = last->val;
-							last->val = count;
-
-							countd = cur->income;
-							cur->income = last->income;
-							last->income = countd;
-
-							counts = cur->f_s_t_names;
-							cur->f_s_t_names = last->f_s_t_names;
-							last->f_s_t_names = counts;
-
-							counti = cur->group;
-							cur->group = last->group;
-							last->group = counti;
-
-							j--;
-						}
-						cur = cur->next;
-						last = last->next;
-					}
-					d = d / 2;
-				}
-			}
-		}
-		catch (MyException exception)
-		{
-			cerr << exception.getErr();
-		}
-
-	}
-
-
-	void Shell()
+	void Shellnewvr4()
 	{
 		try
 		{
@@ -575,6 +486,244 @@ public:
 
 
 
+
+
+
+
+
+
+
+	void readStd(Student* tmp,fstream& file)
+	{
+		char cur[200];
+		char cur1[200];
+		char cur2[200];
+		char cur3[200];
+		int y = 0;
+		char ch = file.get();
+		while (ch != '\n') {
+			*(cur + y) = ch;
+			y++;
+			ch = file.get();
+		}
+		*(cur + y) = '\0';
+
+		tmp->f_s_t_names=cur;
+
+		y = 0;
+		ch = file.get();
+		while (ch != '\n') {
+			*(cur1 + y) = ch;
+			y++;
+			ch = file.get();
+		}
+		*(cur1 + y) = '\0';
+
+		tmp->group = atoi(cur1);
+
+		y = 0;
+		ch = file.get();
+		while (ch != '\n') {
+			*(cur2 + y) = ch;
+			y++;
+			ch = file.get();
+		}
+		*(cur2 + y) = '\0';
+
+		tmp->val = atoi(cur2);
+
+		y = 0;
+		ch = file.get();
+		while (ch != '*') {
+			*(cur3 + y) = ch;
+			y++;
+			ch = file.get();
+		}
+		*(cur3 + y) = '\0';
+
+		tmp->income = atoi(cur3);
+
+
+	}
+
+	
+
+
+	void Shellgr()
+	{
+		try
+		{
+			if (is_empty())
+				throw MyException("tried to sort an empty list\n");
+			T count = 0;
+			string counts;
+			double countd;
+			int counti;
+			int i = 0;
+			int d = size();
+			int n = d;
+			d = d / 2;
+			while (d > 0)
+			{
+				Student* cur = head;
+				Student* last = head;
+				for (i = 0; i < d; i++)
+				{
+					last = last->next;
+				}
+				for (i = 0; i < n - d; i++)
+				{
+					int j = i;
+					while (j >= 0 && cur->group > last->group)
+					{
+						count = cur->val;
+						cur->val = last->val;
+						last->val = count;
+
+						countd = cur->income;
+						cur->income = last->income;
+						last->income = countd;
+
+						counts = cur->f_s_t_names;
+						cur->f_s_t_names = last->f_s_t_names;
+						last->f_s_t_names = counts;
+
+						counti = cur->group;
+						cur->group = last->group;
+						last->group = counti;
+
+						j--;
+					}
+					cur = cur->next;
+					last = last->next;
+				}
+				d = d / 2;
+
+				if (d == 0)
+				{
+					d = 1;
+					Student* cur = head;
+					Student* last = head;
+					for (i = 0; i < d; i++)
+					{
+						last = last->next;
+					}
+					for (i = 0; i < n - d; i++)
+					{
+						int j = i;
+						while (j >= 0 && cur->group > last->group)
+						{
+							count = cur->val;
+							cur->val = last->val;
+							last->val = count;
+
+							countd = cur->income;
+							cur->income = last->income;
+							last->income = countd;
+
+							counts = cur->f_s_t_names;
+							cur->f_s_t_names = last->f_s_t_names;
+							last->f_s_t_names = counts;
+
+							counti = cur->group;
+							cur->group = last->group;
+							last->group = counti;
+
+							j--;
+						}
+						cur = cur->next;
+						last = last->next;
+					}
+					d = d / 2;
+				}
+			}
+		}
+		catch (MyException exception)
+		{
+			cerr << exception.getErr();
+		}
+
+	}
+	
+
+
+
+
+	void Shellnewver4()
+	{
+		try
+		{
+			if (is_empty())
+				throw MyException("tried to sort an empty list\n");
+		File fint;
+		fstream fin("C:/Users/Lenovo/source/repos/Project2.1.8/text.txt", ios::in | ios::out);
+		int i, j, step;
+		Student tmp('a','a');
+		Student	tmp1('a','a');
+		char* grbg1[200];
+		char* grbg2[200];
+		char* tmpc[200];
+		char* tmp1c[200];
+		int n = size();
+		for (int q=0; q < n; q++)
+		{
+			remove_front_empty();
+		}
+		for (step = n / 2; step > 0; step /= 2)
+			for (i = step; i < n; i++)
+			{
+				fin.seekg(fint.myseek(i),ios_base::beg);
+				readStd(&tmp, fin);
+				for (j = i; j >= step; j -= step)
+				{
+					fin.seekg(fint.myseek(j - step), ios_base::beg );
+					readStd(&tmp1, fin);
+					if (tmp.Mark() < tmp1.Mark()) {
+						
+							fin.seekg(fint.myseek(j) , ios_base::beg);
+							fin << tmp1.f_s_t_names << '\n';
+							fin << tmp1.group << '\n';
+							fin << tmp1.val << '\n';
+							fin << tmp1.income << '*';
+						
+							fin.seekg(fint.myseek(i) , ios_base::beg);
+							fin << tmp.f_s_t_names << '\n';
+							fin << tmp.group << '\n';
+							fin << tmp.val << '\n';
+							fin << tmp.income << '*';
+						
+							
+					}
+					else
+							break;
+				}
+				
+					fin.seekg(fint.myseek(j) , ios_base::beg);
+					fin << tmp1.f_s_t_names << '\n';
+					fin << tmp1.group << '\n';
+					fin << tmp1.val << '\n';
+					fin << tmp1.income << '*';
+			
+			}
+		//for (int k = 0; k < n; k++)
+		//{
+		//	fin.seekg(fint.myseek(k), ios_base::beg);
+		//	Student to_add('a', 'a');
+		//	readStd(&to_add, fin);
+		//	to_add.next = head;
+		//	head = &to_add;
+		//	head_iterator = iterator(head);
+		//}
+		}
+		catch (MyException exception)
+		{
+			cerr << exception.getErr();
+		}
+
+	}
+
+
+
 	void add_front(T node_val)
 	{
 		try
@@ -638,6 +787,30 @@ public:
 
 	}
 
+
+	void remove_front_empty()
+	{
+
+		try
+		{
+
+			if (is_empty())
+				throw MyException("tried to remove from an empty list\n");
+			Student* node_to_remove = head;
+			T return_val = node_to_remove->val;
+			head = node_to_remove->next;
+			head_iterator = iterator(head);
+			delete node_to_remove;
+		}
+		catch (MyException exception)
+		{
+			cerr << exception.getErr();
+		}
+
+
+
+	}
+
 	bool remove_it(iterator& key_i)					/////////////
 	{
 		try
@@ -668,6 +841,32 @@ public:
 		}
 
 	}
+
+	int find_and_del(string f_s_t_names) const
+	{
+		iterator prn = head_iterator;
+		iterator rn = prn.the_node->next;
+		if (prn.the_node->f_s_t_names == f_s_t_names)
+		{
+			return 1;
+		}
+		while(rn!=tail_iterator.the_node->next)
+		{
+			if (rn.the_node->f_s_t_names == f_s_t_names)
+			{
+				rn.the_node->get();
+				rn.the_node->getMark();
+				cout << endl;
+				prn.the_node->next = rn.the_node->next;
+				delete rn.the_node;
+			}
+			prn++;
+			rn = prn.the_node->next;
+		}
+		return 0;
+
+	}
+
 
 	bool find(string f_s_t_names) const
 	{
@@ -707,7 +906,15 @@ public:
 	}
 
 
-	
+
+
+	void show_front()
+	{
+		iterator rn = iterator(head);
+		rn.the_node->get();
+		rn.the_node->getMark();
+		cout << endl;
+	}
 
 
 
@@ -720,8 +927,7 @@ public:
 			file << rn.the_node->f_s_t_names<<'\n';
 			file << rn.the_node->group << '\n';
 			file << rn.the_node->val << '\n';
-			file << rn.the_node->income << '\n';
-			file << '*';
+			file << rn.the_node->income << '*';
 			rn.the_node->get();
 			rn.the_node->getMark();
 			cout << endl;	

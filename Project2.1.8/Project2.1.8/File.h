@@ -15,13 +15,14 @@ class File {
 public:
     std::fstream file;
 public:
-
+    //friend ODList<T>;
+  
     
 
     inline File() 
     {
         char* fname2 = _strdup("C:/Users/Lenovo/source/repos/Project2.1.8/text.txt");
-        Open(fname2, ios::in | ios::out | ios::trunc);
+        Open(fname2, ios::in | ios::out );
     }
 
     inline File(char* name, long int mode) 
@@ -41,6 +42,58 @@ public:
     {
         file.open(name, ios::openmode(mode));
     }
+
+
+
+  /*  void readStd(ODList<T>* add, int size)
+    {
+        char cur[200];
+        int ctr = 0;
+        int y = 0;
+        char ch;
+        ReadContent(&ch, 1);
+        
+            while (ch != '\n')
+            {
+                int dgh = GetPointerPosition();
+                *(cur + y) = ch;
+                y++;
+                SetPointerPosition(y);
+                ReadContent(&ch, 1);
+            }
+        
+            add->
+  
+    }*/
+
+
+
+    int myseek(int i)
+    {
+        SetPointerPosition(0);
+        char cur[200];
+        int ctr = 0;
+        int y = 0;
+        char ch;
+        if (i != 0)
+        {
+            ReadContent(&ch, 1);
+            while (ctr < i)
+            {
+                while (ch != '*')
+                {
+                    int dgh = GetPointerPosition();
+                    *(cur + y) = ch;
+                    y++;
+                    SetPointerPosition(y);
+                    ReadContent(&ch, 1);
+                }
+                ctr++;
+            }
+        }
+        return y;
+    }
+    
 
     const static long int moveToEnd = 1L << 1;
     const static long int asBinary = 1L << 2;
@@ -65,11 +118,14 @@ public:
     }
 
    
-    template <class type>  friend ofstream& operator<<(File& out, type& variable);
+    template <class type>  
+    friend ofstream& operator<<(File& out, type& variable);
 
-    template <class type>  friend ifstream& operator>>(File& in, type& variable);
+    template <class type>  
+    friend ifstream& operator>>(File& in, type& variable);
 
-    template <class type> inline void ReadContent(type* pointer, int length) 
+    template <class type> 
+    inline void ReadContent(type* pointer, int length) 
     {
         file.read(reinterpret_cast<char*>(pointer), length);
     }

@@ -152,7 +152,7 @@ int main()
 
 	the_intlist.print();
 	
-	the_intlist.Shell();
+	the_intlist.Shellnewvr4();
 
 	the_intlist.print();
 
@@ -160,7 +160,15 @@ int main()
 
 	the_intlist.print();
 
+	cout << "after removing front" << endl;
 	the_intlist.remove_front();
+
+	if (the_intlist.find_and_del("qwe"))
+	{
+		the_intlist.show_front();
+		the_intlist.remove_front();
+	}
+
 
 
 	//char* fname1 = _strdup("C:/Users/Lenovo/source/repos/Project2.1.8/text.bin");
@@ -182,7 +190,7 @@ int main()
 	//File file2(fname2, ios::in | ios::out | ios::trunc);
 
 	//
-	//file2.file << 'f' <<10;
+	//file2.file << 'f' << 10;
 
 	//file2.SetPointerPosition(0);
 
